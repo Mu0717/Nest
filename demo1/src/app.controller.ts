@@ -6,12 +6,11 @@ import { AppService } from './app.service';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
   // 1. 固定路径：
   // 可以匹配到 get请求，http://localhost:3000/app/list
   @Get('list')
   getHello(): string {
-    return 'Get-list';
+    return `Get-list/${this.appService.getHello()}`;
   }
 
   // 可以匹配到 post请求，http://localhost:3000/app/list
