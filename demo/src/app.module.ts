@@ -10,9 +10,10 @@ import { DemoModule } from './demo/demo.module';
 import { UserModule } from './user/user.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { UploadModule } from './upload/upload.module';
+import { PipeModule } from './pipe/pipe.module';
 
 @Module({
-  imports: [DemoModule, UserModule, UploadModule],
+  imports: [DemoModule, UserModule, UploadModule, PipeModule],
   controllers: [AppController],
   providers: [AppService],
 })

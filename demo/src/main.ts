@@ -3,7 +3,9 @@ import { VersioningType } from '@nestjs/common'; // 引入版本控制工具 htt
 import { AppModule } from './app.module';
 import * as session from 'express-session'; // session 是服务器 为每个用户的浏览器创建的一个会话对象 这个session 会记录到 浏览器的 cookie 用来区分用户
 import { logger } from './logger/logger.middleware';
+import { Response } from './common/response';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { HttpFilter } from './common/filter';
 import { join } from 'path';
 
 async function bootstrap() {
@@ -15,6 +17,8 @@ async function bootstrap() {
     prefix: '/images',
   });
   app.use(logger); // 设置全局中间件
+  app.useGlobalInterceptors(new Response()); // 设置响应拦截器
+  app.useGlobalFilters(new HttpFilter()); // 设置异常拦截器
   app.use(
     session({
       secret: 'mu', //生成服务端session签名

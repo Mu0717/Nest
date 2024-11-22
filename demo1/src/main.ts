@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+console.log(process.env);
 async function bootstrap() {
   // 创建实力注册
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,6 @@ async function bootstrap() {
   // 解决跨域问题
   app.enableCors();
   // 项目启动
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 300);
 }
 bootstrap();
