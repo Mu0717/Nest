@@ -4,11 +4,8 @@ import {
   Param,
   ParseIntPipe,
   ParseUUIDPipe,
-  Post,
-  Body,
+  Query,
 } from '@nestjs/common';
-import { CreatePipeDto } from './dto/create-pipe.dto';
-// import { UpdatePipeDto } from './dto/update-pipe.dto';
 import { PipePipe } from './pipe.pipe';
 
 @Controller('pipe')
@@ -18,8 +15,10 @@ export class PipeController {
     return `getPipe${id}`;
   }
 
-  @Post('create')
-  createPipe(@Body(PipePipe) createPipeDto: CreatePipeDto) {
-    return `createPipe${JSON.stringify(createPipeDto)}`;
+  @Get()
+  // getPipeList(@Query('name', PipePipe) query) { // 给@Query装饰器传递接受参数的key,此时的query === query.name
+  getPipeList(@Query(PipePipe) query) {
+    console.log('query', query);
+    return `getPipeList${JSON.stringify(query)}`;
   }
 }

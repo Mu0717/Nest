@@ -8,3 +8,4 @@ export class PipePipe implements PipeTransform {
     return value;
   }
 }
+ 
