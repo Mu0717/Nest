@@ -7,6 +7,7 @@ import { Response } from './common/response';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { HttpFilter } from './common/filter';
 import { join } from 'path';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -29,6 +30,7 @@ async function bootstrap() {
       rolling: true, //在每次请求时强行设置 cookie，这将重置 cookie 过期时间(默认:false)
     }),
   );
+  app.useGlobalPipes(new ValidationPipe()); // 全局注册DTO管道验证
   app.enableCors();
   /* app.enableCors({
     origin: 'http://localhost:5500', // 设置允许跨域域名
