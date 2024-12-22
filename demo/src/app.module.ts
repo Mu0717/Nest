@@ -11,9 +11,11 @@ import { UserModule } from './user/user.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { UploadModule } from './upload/upload.module';
 import { PipeModule } from './pipe/pipe.module';
+import { CrawlerModule } from './crawler/crawler.module';
+import { GuardModule } from './guard/guard.module';
 
 @Module({
-  imports: [DemoModule, UserModule, UploadModule, PipeModule],
+  imports: [DemoModule, UserModule, UploadModule, PipeModule, CrawlerModule, GuardModule],
   controllers: [AppController],
   providers: [AppService],
 })

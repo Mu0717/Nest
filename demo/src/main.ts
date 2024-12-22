@@ -8,6 +8,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { HttpFilter } from './common/filter';
 import { join } from 'path';
 import { ValidationPipe } from '@nestjs/common';
+import { RoleGuard } from './guard/role/role.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -20,6 +21,7 @@ async function bootstrap() {
   app.use(logger); // 设置全局中间件
   app.useGlobalInterceptors(new Response()); // 设置响应拦截器
   app.useGlobalFilters(new HttpFilter()); // 设置异常拦截器
+  // app.useGlobalGuards(new RoleGuard()); // 全局注册守卫
   app.use(
     session({
       secret: 'mu', //生成服务端session签名
