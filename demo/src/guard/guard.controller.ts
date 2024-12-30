@@ -13,6 +13,7 @@ import { GuardService } from './guard.service';
 import { CreateGuardDto } from './dto/create-guard.dto';
 import { UpdateGuardDto } from './dto/update-guard.dto';
 import { RoleGuard } from './role/role.guard';
+import { Role, ReqUrl } from './role/role.decorator';
 
 @Controller('guard')
 @UseGuards(RoleGuard)
@@ -25,8 +26,11 @@ export class GuardController {
   }
 
   @Get()
-  @SetMetadata('role', ['admin'])
-  findAll() {
+  // @SetMetadata('role', ['admin']) // 使用守卫搭配使用SetMetadata和@UseGuards(RoleGuard)
+  @Role('admin') // 自定义装饰器，
+  findAll(@ReqUrl('123') url) {
+    // 自定义参数装饰器
+    console.log('url', url);
     return this.guardService.findAll();
   }
 
